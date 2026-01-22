@@ -186,17 +186,17 @@ My love, my soul, forever by my side.`;
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
-        className="max-w-4xl w-full p-6 z-10"
+        className="max-w-4xl w-full p-4 sm:p-6 z-10"
       >
         <div className="rounded-2xl shadow-xl bg-white/80 backdrop-blur">
-          <div className="p-8 text-center space-y-6">
+          <div className="p-4 sm:p-6 md:p-8 text-center space-y-4 sm:space-y-6">
             {!isAuthorized ? (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="space-y-6"
               >
-                <h1 className="text-4xl font-bold text-rose-600">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-rose-600">
                   Enter Your Name 💕
                 </h1>
                 <form onSubmit={handleNameSubmit} className="space-y-4">
@@ -224,7 +224,7 @@ My love, my soul, forever by my side.`;
             ) : currentPage === 0 ? (
               !yesClicked ? (
                 <div className="space-y-6">
-                  <h2 className="text-4xl font-bold text-rose-600">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-rose-600">
                     Musindi, will you be my valentine?</h2>
                   <p className="text-lg text-gray-700">
                     You make my heart softer,my life
@@ -232,15 +232,15 @@ My love, my soul, forever by my side.`;
                     You deserve all the love and happiness in the universe.
                   </p>
 
-                  <div className="flex justify-center gap-4">
+                  <div className="flex flex-col sm:flex-row justify-center gap-4">
                     <button
                       onClick={() => setYesClicked(true)}
-                      className="bg-rose-500 hover:bg-rose-600 text-white rounded-full px-8 py-2"
+                      className="bg-rose-500 hover:bg-rose-600 text-white rounded-full px-6 sm:px-8 py-2"
                     >
                       Yes 💖
                     </button>
                     <button
-                      className="bg-black text-white border border-gray-300 rounded-full px-8 py-2"
+                      className="bg-black text-white border border-gray-300 rounded-full px-6 sm:px-8 py-2"
                       onMouseEnter={(e) => {
                         e.target.style.transform = `translate(${Math.random() * 150 - 75}px, ${Math.random() * 150 - 75}px)`;
                       }}
@@ -260,7 +260,7 @@ My love, my soul, forever by my side.`;
                     <Heart /> <Heart /> <Heart />
                   </div>
 
-                  <h2 className="text-3xl font-semibold text-rose-600">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-rose-600">
                     YAY!! I knew it 🥹💞
                     I LOVE YOUU BRENDAAAA💞💞💞🥹🥹
                   </h2>
@@ -282,7 +282,7 @@ My love, my soul, forever by my side.`;
 
                   {/* Spotify Section */}
                   <div className="space-y-7">
-                    <h3 className="text-2xl font-semibold text-rose-600">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-rose-600">
                       Songs that remind me of you 🥹🥹🎶
                     </h3>
                     <div className="grid grid-cols-1 gap-6">
@@ -312,7 +312,7 @@ My love, my soul, forever by my side.`;
                 animate={{ opacity: 1 }}
                 className="space-y-8"
               >
-              <h2 className="text-3xl font-semibold text-rose-600">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-rose-600">
                 Our Favorite Memories 📸
               </h2>
               <span>I sit down and stare at these pictures of you - Kinoti</span>
@@ -354,11 +354,11 @@ My love, my soul, forever by my side.`;
               animate={{ opacity: 1 }}
               className="space-y-8"
             >
-              <h2 className="text-3xl font-semibold text-rose-600">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-rose-600">
                 A Poem for My Princess💌
               </h2>
               <div className="text-left max-w-2xl mx-auto">
-                <pre className="whitespace-pre-wrap text-gray-700 text-lg leading-relaxed font-serif italic">
+                <pre className="whitespace-pre-wrap text-gray-700 text-base sm:text-lg leading-relaxed font-serif italic">
                   {poem}
                 </pre>
               </div>
@@ -374,7 +374,7 @@ My love, my soul, forever by my side.`;
       </motion.div>
 
       {/* Navigation Arrows */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-8 z-20">
+      <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex gap-4 sm:gap-8 z-20">
         <button
           onClick={prevPage}
           disabled={currentPage === 0 || !isAuthorized}
@@ -393,25 +393,25 @@ My love, my soul, forever by my side.`;
 
       {/* Enlarged Media Modal */}
       {enlargedMedia && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50" onClick={() => setEnlargedMedia(null)}>
-          <div className="relative max-w-4xl max-h-full p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4" onClick={() => setEnlargedMedia(null)}>
+          <div className="relative w-full max-w-4xl max-h-full">
             {enlargedMedia.type === 'image' ? (
               <img
                 src={enlargedMedia.src}
                 alt="Enlarged"
-                className="max-w-full h-150 object-contain rounded-lg"
+                className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
               />
             ) : (
               <video
                 src={enlargedMedia.src}
                 controls
                 autoPlay
-                className="max-w-full h-150 object-contain rounded-lg"
+                className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
               />
             )}
             <button
               onClick={() => setEnlargedMedia(null)}
-              className="absolute top-2 right-2 text-white text-2xl bg-black bg-opacity-50 rounded-full w-10 h-10 flex items-center justify-center hover:bg-opacity-75"
+              className="absolute top-2 right-2 text-white text-xl sm:text-2xl bg-black bg-opacity-50 rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center hover:bg-opacity-75"
             >
               ×
             </button>
