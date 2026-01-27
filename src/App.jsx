@@ -36,7 +36,19 @@ import vid3 from './assets/WhatsApp Video 2026-01-22 at 9.01.57 PM (1).mp4';
 import vid4 from './assets/WhatsApp Video 2026-01-22 at 9.01.57 PM (2).mp4';
 import vid5 from './assets/WhatsApp Video 2026-01-22 at 9.01.57 PM.mp4';
 import vid6 from './assets/WhatsApp Video 2026-01-22 at 9.01.58 PM.mp4';
-
+import img29 from './assets/WhatsApp Image 2026-01-27 at 7.50.42 AM.jpeg'
+import img30 from './assets/WhatsApp Image 2026-01-27 at 7.50.49 AM.jpeg';
+import img31 from './assets/WhatsApp Image 2026-01-27 at 7.51.00 AM (1).jpeg';
+import img32 from './assets/WhatsApp Image 2026-01-27 at 7.51.00 AM.jpeg';
+import img33 from './assets/WhatsApp Image 2026-01-27 at 7.51.01 AM.jpeg';
+import img34 from './assets/WhatsApp Image 2026-01-27 at 7.51.01 AM (1).jpeg';
+import img35 from './assets/WhatsApp Image 2026-01-27 at 7.51.01 AM (2).jpeg';
+import img36 from './assets/WhatsApp Image 2026-01-27 at 7.51.20 AM.jpeg';
+import img37 from './assets/WhatsApp Image 2026-01-27 at 7.58.36 AM.jpeg';
+import vid7 from './assets/WhatsApp Video 2026-01-27 at 7.50.49 AM.mp4';
+import vid8 from './assets/WhatsApp Video 2026-01-27 at 7.50.54 AM.mp4';
+import vid9 from './assets/WhatsApp Video 2026-01-27 at 7.51.19 AM.mp4';
+import vid10 from './assets/WhatsApp Video 2026-01-27 at 7.58.36 AM.mp4';
 const generateHeartPositions = () => [...Array(20)].map(() => ({
   x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
   duration: 8 + Math.random() * 5,
@@ -49,7 +61,11 @@ export default function ValentineApp() {
   const [enlargedMedia, setEnlargedMedia] = useState(null);
   const [userName, setUserName] = useState('');
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [heartPositions] = useState(generateHeartPositions);
+
+  const allowedNames = ['brenda', 'musindi', 'mmbone'];
+  const cleanName = userName.trim().toLowerCase();
 
   const media = [
     { type: 'image', src: img1 },
@@ -80,12 +96,25 @@ export default function ValentineApp() {
     { type: 'image', src: img26 },
     { type: 'image', src: img27 },
     { type: 'image', src: img28 },
+    { type: 'image', src: img29 },
+    { type: 'image', src: img30 },
+    { type: 'image', src: img32 },
+    { type: 'image', src: img31 },
+    { type: 'image', src: img33 },
+    { type: 'image', src: img34 },
+    { type: 'image', src: img35 },
+    { type: 'image', src: img36 },
+    { type: 'image', src: img37 },
     { type: 'video', src: vid1 },
     { type: 'video', src: vid2 },
     { type: 'video', src: vid3 },
     { type: 'video', src: vid4 },
     { type: 'video', src: vid5 },
     { type: 'video', src: vid6 },
+    { type: 'video', src: vid7 },
+    { type: 'video', src: vid8 },
+    { type: 'video', src: vid9 },
+    { type: 'video', src: vid10 },
   ];
 
   const poem = `In your eyes, I see the stars align,
@@ -129,21 +158,21 @@ My love, my soul, forever by my side.`;
         spread: 120,
         origin: { y: 0.6 },
       });
-      setCurrentPage(1); // Go to photos after yes
+      setCurrentPage(1); 
     }
   }, [yesClicked]);
 
   const handleNameSubmit = (e) => {
     e.preventDefault();
-    const allowedNames = ['Brenda', 'Musindi', 'Mmbone'];
-    if (allowedNames.includes(userName.trim())) {
+    setSubmitted(true);
+    if (allowedNames.includes(cleanName)) {
       setIsAuthorized(true);
     }
   };
 
   const nextPage = () => {
     if (isAuthorized) {
-      setCurrentPage((prev) => Math.min(prev + 1, 2));
+      setCurrentPage((prev) => Math.min(prev + 1, 3));
     }
   };
 
@@ -215,11 +244,18 @@ My love, my soul, forever by my side.`;
                     Enter
                   </button>
                 </form>
-                {userName && !['Brenda', 'Musindi', 'Mmbone'].includes(userName.trim()) && (
-                  <p className="text-red-500 text-lg">
-                    You're not my girlfriend... this isn't meant for you 😔
-                  </p>
-                )}
+                {userName && !allowedNames.includes(cleanName) && (
+  <p className="text-red-500 text-lg">
+    You're not my girlfriend... this isn't meant for you 😔
+  </p>
+)}
+
+{userName && allowedNames.includes(cleanName) && (
+  <p className="text-green-600 text-lg">
+    {userName.trim()} My Loveeee!🥹💖  
+    Hiiii Babyyyyy🥹🥹🥹
+  </p>
+)}
               </motion.div>
             ) : currentPage === 0 ? (
               !yesClicked ? (
@@ -338,7 +374,10 @@ My love, my soul, forever by my side.`;
                       />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-4">
-                      <p className="text-white text-sm">{item.type === 'image' ? 'Our moment' : 'Our memory'}</p>
+                      <div className="flex justify-center text-rose-500">
+                <h2 className="text-center text-rose-500">Endgame</h2>
+                <Heart className="animate-pulse" />
+              </div>
                     </div>
                   </motion.div>
                 ))}
@@ -384,7 +423,7 @@ My love, my soul, forever by my side.`;
         </button>
         <button
           onClick={nextPage}
-          disabled={currentPage === 2 || !isAuthorized}
+          disabled={currentPage === 3 || !isAuthorized}
           className="p-3 bg-white/80 backdrop-blur rounded-full shadow-lg hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
         >
           <ChevronRight className="w-6 h-6 text-rose-600" />
